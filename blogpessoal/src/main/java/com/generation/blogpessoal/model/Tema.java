@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -26,7 +27,11 @@ public class Tema {
 	
 	@OneToMany(mappedBy = "tema", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("tema")
-	private List<postagem> postagem;
+	private List<Postagem> postagem;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Usuario usuario;
 
 	public long getId() {
 		return id;
@@ -44,11 +49,11 @@ public class Tema {
 		this.descricao = descricao;
 	}
 	
-	public List<postagem> getPostagem() {
+	public List<Postagem> getPostagem() {
 		return postagem;
 	}
 
-	public void setPostagem(List<postagem> postagem) {
+	public void setPostagem(List<Postagem> postagem) {
 		this.postagem = postagem;
 	}
 	
